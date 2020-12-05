@@ -10,25 +10,14 @@ import java.util.Map;
 
 public class Day4 {
     public Object part1(List<String> listOfRows) {
-
-        List<Passport> passports = new ArrayList<>();
-        List<String> passportList = new ArrayList<>();
-        for (var row : listOfRows) {
-
-            if (row.trim().isEmpty()) {
-                passports.add(new Passport(passportList));
-                passportList.clear();
-                continue;
-            }
-            passportList.add(row);
-        }
-
-        return passports.stream().filter(Passport::isValid).count();
-
+        return toPassports(listOfRows).stream().filter(Passport::isValid).count();
     }
 
     public Object part2(List<String> listOfRows) {
+        return toPassports(listOfRows).stream().filter(Passport::isValid).filter(Passport::isValid2).count();
+    }
 
+    private List<Passport> toPassports(List<String> listOfRows) {
         List<Passport> passports = new ArrayList<>();
         List<String> passportList = new ArrayList<>();
         for (var row : listOfRows) {
@@ -40,11 +29,8 @@ public class Day4 {
                 continue;
             }
             passportList.add(row);
-
-
         }
-        return passports.stream().filter(Passport::isValid).filter(Passport::isValid2).count();
-
+        return passports;
     }
 
     @Data
@@ -115,7 +101,5 @@ public class Day4 {
             }
             return result;
         }
-
     }
-
 }
