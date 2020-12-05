@@ -20,13 +20,13 @@ public class Day5 {
 
     private Integer findNegativeSeatId(int currentSeat, int nextSeat) {
         if (currentSeat < 0) {
-            return currentSeat; //answer is found
+            return currentSeat; // answer is found
         } else if (currentSeat == 0) {
-            return nextSeat; //first time
+            return nextSeat; // first time
         } else if (nextSeat - currentSeat > 1) {
-            return  -nextSeat + 1; //always return old
+            return  -nextSeat + 1; // return negative answer to halt reduction
         } else {
-            return nextSeat;
+            return nextSeat; // always return next
         }
     }
 
