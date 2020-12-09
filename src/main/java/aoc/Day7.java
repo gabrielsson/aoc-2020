@@ -62,7 +62,9 @@ public class Day7 {
 
         String name;
         Map<Bag, Integer> bags = new HashMap<>();
+        private Bag() {
 
+        }
         public Bag(String desc) {
             int beginningOfBags = desc.indexOf(" bags contain ");
             name = desc.substring(0, beginningOfBags);

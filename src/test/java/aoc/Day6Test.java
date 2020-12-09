@@ -9,19 +9,19 @@ public class Day6Test {
     @Test
     public void part1example() {
         PuzzleInput input = new PuzzleInput("day6ex.txt");
-        Assertions.assertEquals(11, day.part2(input.getListOfRows()));
+        Assertions.assertEquals(6, day.part2(input.getListOfRows()));
     }
 
     @Test
     public void part1() {
         PuzzleInput input = new PuzzleInput("day6.txt");
-        Assertions.assertEquals("", day.part1(input.getListOfRows()));
+        Assertions.assertEquals(7027, day.part1(input.getListOfRows()));
 
     }
 
     @Test
     public void part2() {
         PuzzleInput input = new PuzzleInput("day6.txt");
-        Assertions.assertEquals("", day.part2(input.getListOfRows()));
+        Assertions.assertEquals(3579, day.part2(input.getListOfRows()));
     }
 }

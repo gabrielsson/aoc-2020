@@ -72,6 +72,19 @@ public class PuzzleInput {
         return rows;
 
     }
+
+    public List<Long> getListOfLongs() {
+        List<Long> rows = new ArrayList<>();
+
+        Scanner sc = getInputScanner();
+        while(sc.hasNext()) {
+            rows.add(Long.valueOf(sc.next()));
+        }
+
+        return rows;
+
+    }
+
     public List<String> getListOfRows() {
         List<String> rows = new ArrayList<>();
         Scanner scanner = getInputScanner();
