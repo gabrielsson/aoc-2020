@@ -14,12 +14,9 @@ public class Day10 {
             if (difference == 1) {
                 ones++;
             }
-
             if (difference == 3) {
-
                 threes++;
             }
-
         }
         return ones * threes;
 
@@ -32,39 +29,30 @@ public class Day10 {
         return listOfRows.stream().mapToInt(Integer::intValue).sorted().toArray();
     }
 
-    public Object part2(List<Integer> listOfRows) {
-
-        int[] ints = getInts(listOfRows);
-        List<List<Integer>> listOfPossiblePermutations = listOfPermutableLists(ints);
-
-        long sum = 1;
-        for (var sub : listOfPossiblePermutations) {
-
-            long i = 0;
-            sum *= countCompleteConnections(sub.toArray(new Integer[sub.size()]), sub.size() - 1, i);
-        }
-
-        return sum;
-
+    public long part2(List<Integer> listOfRows) {
+        return listOfPossiblePermutations(getInts(listOfRows)).stream()
+            .map(list -> list.stream().mapToInt(Integer::intValue).toArray())
+            .map(arr -> countCompleteConnections(arr, 0, 0))
+            .reduce((v1,v2) -> v1*v2).get();
     }
 
 
 
-    private long countCompleteConnections(Integer[] ints, int index, long result) {
-        if (index == 0) {
+    private long countCompleteConnections(int[] ints, int index, long result) {
+        if (index == ints.length-1) {
             return ++result;
         }
-        for (int j = 1; j <= 3 && index - j >= 0; j++) {
 
-            if (ints[index] - ints[index - j] <= 3) {
-                result = countCompleteConnections(ints, index - j, result);
+        for (int j = 1; j <= 3 && index + j < ints.length; j++) {
+            if (ints[index + j] - ints[index]  <= 3) {
+                result = countCompleteConnections(ints, index + j, result);
             }
         }
 
         return result;
     }
 
-    private List<List<Integer>> listOfPermutableLists(int[] ints) {
+    private List<List<Integer>> listOfPossiblePermutations(int[] ints) {
         List<List<Integer>> listOfPossiblePermutations = new ArrayList<>();
         List<Integer> sublist = new ArrayList<>();
         for (int i = 0; i < ints.length - 1; i++) {
