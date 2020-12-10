@@ -1,7 +1,6 @@
 package aoc;
 
 import java.util.List;
-import java.util.OptionalLong;
 
 public class Day9 {
     public Object part1(List<Long> listOfRows, int preamble) {
