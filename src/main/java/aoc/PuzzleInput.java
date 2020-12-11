@@ -95,7 +95,7 @@ public class PuzzleInput {
         return rows;
     }
 
-    private char[][] getMapYx() {
+    public char[][] getMapYx() {
         List<String> listOfRows = getListOfRows();
         char[][] map = new char[listOfRows.size()][listOfRows.get(0).length()];
         for (int i = 0; i < listOfRows.size(); i++) {
@@ -110,7 +110,7 @@ public class PuzzleInput {
         return swapMatrix(getMapYx());
     }
 
-    private static char[][] swapMatrix(char[][] pField) {
+    public static char[][] swapMatrix(char[][] pField) {
 
         int originalTotalRows = pField.length;
         int originalTotalColumns = pField[0].length;

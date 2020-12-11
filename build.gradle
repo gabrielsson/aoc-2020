@@ -19,6 +19,10 @@ repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
+    maven {
+        url "http://maven.imagej.net/content/groups/public/"
+    }
 }
 
 dependencies {
@@ -35,6 +39,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.10")
     implementation 'com.github.dpaukov:combinatoricslib3:3.3.0'
+    compile group: 'com.github.AlmasB', name: 'AStar', version: '1.0.1'
 
     // Use JUnit test framework
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'
