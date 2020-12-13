@@ -1,6 +1,7 @@
 package aoc;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Day12 {
@@ -117,7 +118,7 @@ public class Day12 {
         for (var row : listOfRows) {
             int value = Integer.valueOf(row.substring(1));
             String action = row.substring(0, 1);
-            Point move = new Point(0, 0);
+            Point move;
             switch (action) {
                 case "F":
                     move = new Point(waypoint.x*value, waypoint.y*value);
@@ -134,8 +135,6 @@ public class Day12 {
                     waypoint.move(waypoint.x + move.x, waypoint.y + move.y);
                     break;
             }
-
-
         }
 
         return getManhattanDistance(new Point(0, 0), ship);
@@ -156,5 +155,7 @@ public class Day12 {
         }
         return waypoint;
     }
+
+
 
 }
