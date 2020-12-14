@@ -9,25 +9,25 @@ public class Day13Test {
     @Test
     public void part1example() {
         PuzzleInput input = new PuzzleInput("day13ex.txt");
-        Assertions.assertEquals("", day.part1(input.getListOfRows()));
+        Assertions.assertEquals(295, day.part1(input.getListOfRows()));
     }
 
     @Test
     public void part2example() {
         PuzzleInput input = new PuzzleInput("day13ex.txt");
-        Assertions.assertEquals("", day.part2(input.getListOfRows()));
+        Assertions.assertEquals(1068781L, day.part2(input.getListOfRows()));
     }
 
     @Test
     public void part1() {
         PuzzleInput input = new PuzzleInput("day13.txt");
-        Assertions.assertEquals("", day.part1(input.getListOfRows()));
+        Assertions.assertEquals(4207, day.part1(input.getListOfRows()));
 
     }
 
     @Test
     public void part2() {
         PuzzleInput input = new PuzzleInput("day13.txt");
-        Assertions.assertEquals("", day.part2(input.getListOfRows()));
+        Assertions.assertEquals(725850285300475L, day.part2(input.getListOfRows()));
     }
 }

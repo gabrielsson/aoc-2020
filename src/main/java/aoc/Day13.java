@@ -1,67 +1,80 @@
 package aoc;
 
+import lombok.Builder;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Day13 {
     public Object part1(List<String> listOfRows) {
         int timestamp = Integer.parseInt(listOfRows.get(0));
-
-        var busEntry = Arrays.stream(listOfRows.get(1).split(","))
-            .filter(s -> !"x".equals(s))
-            .map(Integer::parseInt)
-            .collect(Collectors.toMap(
-                i -> i,
-                i -> i - (timestamp % i))
-            )
-            .entrySet().stream()
-            .min(Comparator.comparing(Map.Entry::getValue))
+        var bus = streamBuses(listOfRows.get(1).split(","))
+            .min(Comparator.comparing(b -> b.nextBus(timestamp)))
             .get();
-
-        return busEntry.getKey() * busEntry.getValue();
-
+        return bus.nextBus(timestamp)* bus.getBusId();
     }
 
     public Object part2(List<String> listOfRows) {
 
-        String[] split = listOfRows.get(1).split(",");
+        AtomicLong time = new AtomicLong(0L);
+        AtomicLong multiplier = new AtomicLong(1L);
 
-        List<Map.Entry<Integer, Integer>> buses = IntStream.range(0, split.length)
-            .mapToObj(Integer::valueOf)
-            .collect(Collectors.toMap(
-                i -> i,
-                i -> split[i])
-            ).entrySet().stream()
-            .filter(e -> !"x".equals(e.getValue()))
-            .map(entry -> new AbstractMap.SimpleEntry<Integer, Integer>(entry.getKey(),
-                Integer.valueOf(entry.getValue())))
-            .sorted(Comparator.comparing(Map.Entry::getValue))
-            .collect(Collectors.toList());
-
-        long time = 0L;
-        long multiplier = 1L;
-        for (var bus : buses) {
-            boolean found = false;
-            while (!found) {
-                if ((time + bus.getKey()) % bus.getValue() == 0) {
-                    multiplier *= bus.getValue();
-                    found = true;
-                } else {
-                    time += multiplier;
+        streamBuses(listOfRows.get(1).split(","))
+            .forEach(bus -> {
+                boolean found = false;
+                while (!found) {
+                    if ((time.get() + bus.getOffset()) % bus.getBusId() == 0) {
+                        multiplier.updateAndGet(v -> v * bus.getBusId());
+                        found = true;
+                    } else {
+                        time.addAndGet(multiplier.get());
+                    }
                 }
+            });
+        return time.get();
+    }
+
+    private Stream<Bus> streamBuses(String[] split) {
+        return IntStream.range(0, split.length)
+            .mapToObj(i -> Bus.builder()
+                .value(split[i])
+                .offset(i)
+                .build())
+            .filter(Bus::isValid);
+    }
+
+    @Builder
+    public static class Bus {
+        String value;
+        Integer offset;
+
+        public boolean isValid() {
+            return !"x".equals(value);
+        }
+
+        public int getOffset() {
+            return offset;
+        }
+
+        public int getBusId() {
+            try {
+                return Integer.valueOf(value);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
 
-        return time;
+        public int nextBus(int timestamp) {
+            return getBusId() - (timestamp % getBusId());
+        }
     }
 
-    public Object part2WolframAlfa(List<String> listOfRows) {
+    public Object part2WolframAlpha(List<String> listOfRows) {
 
         String[] split = listOfRows.get(1).split(",");
 
