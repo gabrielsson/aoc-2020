@@ -16,7 +16,7 @@ public class Day13 {
         var bus = streamBuses(listOfRows.get(1).split(","))
             .min(Comparator.comparing(b -> b.nextBus(timestamp)))
             .get();
-        return bus.nextBus(timestamp)* bus.getBusId();
+        return bus.nextBus(timestamp) * bus.getBusId();
     }
 
     public Object part2(List<String> listOfRows) {
