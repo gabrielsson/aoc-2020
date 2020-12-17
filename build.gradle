@@ -40,6 +40,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.10")
     implementation 'com.github.dpaukov:combinatoricslib3:3.3.0'
     compile group: 'com.github.AlmasB', name: 'AStar', version: '1.0.1'
+// https://mvnrepository.com/artifact/javax.vecmath/vecmath
+    compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
 
     // Use JUnit test framework
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'

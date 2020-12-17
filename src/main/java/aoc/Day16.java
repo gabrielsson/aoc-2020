@@ -3,11 +3,9 @@ package aoc;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.paukov.combinatorics3.PermutationGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +40,6 @@ public class Day16 {
             i++;
         }
         i+=5;
-        Map<Integer, List<Value>> fits = new HashMap<>();
         long sum = 0;
         for(; i< listOfRows.size(); i++) {
             String s = listOfRows.get(i);
@@ -61,11 +58,9 @@ public class Day16 {
                     sum+=j;
                 }
             }
-
         }
 
         return sum;
-
     }
 
     public Object part2(List<String> listOfRows) {
@@ -124,30 +119,23 @@ public class Day16 {
         for(int index = 0; index < validTickets.get(0).length; index++) {
             int finalIndex = index;
             List<Integer> category = validTickets.stream().map(ints -> ints[finalIndex]).collect(Collectors.toList());
-            for(var ticket : validTickets) {
-                for(var rule : rules) {
-                    if(category.stream().allMatch(rule::canHandle)) {
-                        Set<Integer> orDefault = keyMap.getOrDefault(rule.key, new HashSet<>());
-                        orDefault.add(index);
-                        keyMap.putIfAbsent(rule.key, orDefault);
-                    }
-
+            for(var rule : rules) {
+                if(category.stream().allMatch(rule::canHandle)) {
+                    Set<Integer> orDefault = keyMap.getOrDefault(rule.key, new HashSet<>());
+                    orDefault.add(index);
+                    keyMap.putIfAbsent(rule.key, orDefault);
                 }
             }
         }
 
         Map<String, Integer> stringIntegerMap = figureOut(keyMap);
 
-        List<Integer> myTicket = Arrays.asList(59, 101, 191, 149, 167, 197, 199, 137, 163, 131, 113, 67, 103, 97, 61, 139, 157, 151, 193, 53);
-
+        List<Integer> myTicket = Arrays.asList(59, 101, 191, 149, 167, 197, 199, 137, 163,
+            131, 113, 67, 103, 97, 61, 139, 157, 151, 193, 53);
         return stringIntegerMap.entrySet().stream()
             .filter(stringIntegerEntry -> stringIntegerEntry.getKey().startsWith("departure"))
             .mapToLong(stringIntegerEntry -> myTicket.get(stringIntegerEntry.getValue()))
             .reduce((l, l1) -> l*l1);
-
-
-
-
     }
 
     private Map<String, Integer> figureOut(Map<String, Set<Integer>> keyMap) {
