@@ -42,6 +42,7 @@ dependencies {
     compile group: 'com.github.AlmasB', name: 'AStar', version: '1.0.1'
 // https://mvnrepository.com/artifact/javax.vecmath/vecmath
     compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 
     // Use JUnit test framework
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.14.0'

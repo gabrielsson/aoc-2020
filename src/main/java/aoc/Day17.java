@@ -3,17 +3,12 @@ package aoc;
 import aoc.points.AOCPoint3i;
 import aoc.points.AOCPoint4i;
 
-import javax.vecmath.Point3i;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static aoc.PuzzleInput.swapMatrix;
 
 public class Day17 {
     public Object part1(char[][] mapXy) {
