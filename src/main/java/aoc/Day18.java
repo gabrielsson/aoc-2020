@@ -110,31 +110,6 @@ public class Day18 {
         }
         return numbers.stream().mapToLong(Long::longValue).reduce(((l, l1) -> l*l1)).getAsLong();
     }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class CalculationNumber {
-
-        Long v1;
-        Long v2;
-        String sign;
-
-        public CalculationNumber(CalculationNumber copy) {
-            this.v1 = copy.v1;
-            this.v2 = copy.v2;
-            this.sign = copy.sign;
-        }
-
-        public long value() {
-            if (sign.equals("+")) {
-                return v1 + v2;
-            } else if (sign.equals("*")) {
-                return v1 * v2;
-            }
-            throw new RuntimeException();
-        }
-    }
-
 }
 
 
